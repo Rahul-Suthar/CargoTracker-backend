@@ -6,9 +6,6 @@ const router = express.Router();
 
 router.post("/", async (req, res) => {
   const { shipmentId, containerId, routes, location, eta, status } = req.body;
-  if (!shipmentId || !containerId || !routes || !location || !eta) {
-    return res.status(400).json({ message: "Missing required fields" });
-  }
   try {
     const newShipment = new Shipment({
       shipmentId,
@@ -29,7 +26,7 @@ router.get("/:id", getShipment, (req, res) => {
   res.status(200).json(req.shipment);
 });
 
-router.post("/:id/update-location", getShipment, async (req, res) => {
+router.patch("/:id/update-location", getShipment, async (req, res) => {
   try {
     req.shipment.location = req.body.location;
     await req.shipment.save();

@@ -27,8 +27,9 @@ const shipmentSchema = new mongoose.Schema(
     },
     status: {
       type: String,
-      enum: ["in-transit", "delivered", "pending"],
-      default: "in-transit",
+      enum: ["In-Transit", "Delivered", "Delayed", "Awaiting Departure"],
+      default: "Awaiting Departure",
+      required: true,
     },
   },
   { timestamps: true }
